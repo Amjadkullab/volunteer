@@ -24,16 +24,14 @@ class Category extends Model
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'category_id', 'id');
+        return $this->hasMany(Post::class, 'institution_id', 'id');
     }
+
     public function institutions()
     {
-        return $this->hasMany(institution::class, 'category_id', 'id');
+        return $this->hasMany(institution::class, 'institution_id', 'id');
     }
-    public function admins()
-    {
-        return $this->hasMany(admin::class, 'category_id', 'id');
-    }
+
 
     public function ScopeActive(Builder $builder)
     {
@@ -75,5 +73,5 @@ class Category extends Model
            'image_url',
        ];
 
- 
+
 }

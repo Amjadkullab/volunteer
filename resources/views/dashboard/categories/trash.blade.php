@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
-                    <td><img src="{{ asset('storage/' . $category->image) }}" width="120" height="80"> </td>
+                    <td><img src="{{ asset('uploads/categories/' . $category->image) }}" width="120" height="80"> </td>
                     <td>{{ $category->status == 'active' ? 'نشط' : 'أرشيف' }}</td>
                     <td>{{ $category->created_at }}</td>
                     <td>{{ $category->deleted_at }}</td>

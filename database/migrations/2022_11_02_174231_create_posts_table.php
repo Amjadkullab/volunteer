@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('institution_id')->constrained('institutions');
             $table->foreignId('category_id');
             $table->string('title');
             $table->text('description');
@@ -24,7 +25,6 @@ return new class extends Migration
                 ->default('active');
             $table->timestamps();
             $table->softDeletes();
- 
         });
     }
 

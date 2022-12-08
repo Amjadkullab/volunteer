@@ -39,7 +39,7 @@
             <tr>
                         <td>{{ $post->id}}</td>
                         <td> {{ $post->title }}</td>
-                        <td><img src="{{ asset('storage/' . $post->image) }}" width="120" height="80"> </td>
+                        <td><img src="{{ asset('uploads/posts/' . $post->image) }}" width="120" height="80"> </td>
                         <td>{{ $post->location }}</td>
                         <td>{{ $post->status == 'active' ? 'نشط' : 'أرشيف' }}</td>
                         <td>{{ $post->created_at }}</td>

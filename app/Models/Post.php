@@ -17,20 +17,17 @@ class Post extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id')
+        return $this->belongsTo(Category::class,'category_id', 'id')
             ->withDefault(
                 [
                     'name' => 'اسم الفئة'
                 ]
             );
     }
-    public function admins()
-    {
-        return $this->hasMany(Admin::class, 'post_id', 'id');
-    }
+
     public function institutions()
     {
-        return $this->hasMany(institution::class, 'post_id', 'id');
+        return $this->belongsTo(institution::class, 'institution_id', 'id');
     }
 
     public static function rules()
@@ -44,6 +41,7 @@ class Post extends Model
             'status' => ['in:active,archived'],
         ];
     }
+
     public function institution()
     {
         return $this->belongsTo(institution::class, 'institution_id', 'id')
@@ -53,6 +51,7 @@ class Post extends Model
                 ]
             );
     }
+
     public function scopeFilter(Builder $builder, $filters)
     {
         $options = array_merge([

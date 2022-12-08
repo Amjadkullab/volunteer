@@ -77,7 +77,7 @@ Route::group(
         Route::resource('posts', PostController::class);
         Route::get('posts/trash', [PostController::class, 'trash'])
             ->name('posts.trash');
-            Route::resource('institution',InstitutionController::class);
+
 
 
             Route::get('edit-password',[AuthController::class , 'changePassword'])->name('change-password');
@@ -111,9 +111,9 @@ Route::group(
             Route::resource('roles', RoleController::class);
             Route::resource('permissions',PermissionController::class);
             Route::resource('roles.permissions', RolePermissionsController::class);
+            Route::resource('institution',InstitutionController::class);
+
             Route::resource('institutions.permissions',InstitutionPermissionsController::class);
-
-
 
 
     }

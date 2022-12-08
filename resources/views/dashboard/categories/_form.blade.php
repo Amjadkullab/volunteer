@@ -2,7 +2,7 @@
     <label>الاسم</label>
     <input type="text" name="name" @class(['form-control', 'is-invalid' => $errors->has('name')]) value="{{ old('name', $category->name) }}">
     @error('name')
-        <div class="invalid-feedback">{{ $message }}</div> 
+        <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>
 
@@ -28,7 +28,7 @@
     <label>الصورة</label>
     <input type="file" name="image" @class(['form-control', 'is-invalid' => $errors->has('image')])accept="image/*">
     @if ($category->image)
-        <img src="{{ asset('storage/' . $category->image) }}" width="200">
+        <img src="{{ asset('uploads/categories/' . $category->image) }}" width="200">
     @endif
     @error('image')
         <div class="invalid-feedback">{{ $message }}</div>

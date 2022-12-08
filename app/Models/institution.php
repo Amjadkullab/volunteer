@@ -24,7 +24,7 @@ class Institution extends Authenticatable
     }
     public function post()
     {
-        return $this->belongsTo(Post::class, 'post_id', 'id')
+        return $this->hasMany(Post::class, 'institution_id', 'id')
             ->withDefault(
                 [
                     'name' => 'اسم المنشور'
@@ -35,19 +35,19 @@ class Institution extends Authenticatable
     {
         $builder->where('active', '=', '1');
     }
-    public static function rules()
-    {
-        return [
-            'name' => 'required|string|min:3|max:255',
-            'cover_image' => 'required|image',
-            'logo_image' => 'required|image',
-            'description' => 'required|string|min:3',
-            'active' =>'required',
-            'email'=>'required',
-            // 'role_id'=>'required|numeric|exists:roles,id',
+    // public static function rules()
+    // {
+    //     return [
+    //         'name' => 'required|string|min:3|max:255',
+    //         'cover_image' => 'required|image',
+    //         'logo_image' => 'required|image',
+    //         'description' => 'required|string|min:3',
+    //         'active' =>'required',
+    //         'email'=>'required',
+    //         'role_id'=>'required|numeric|exists:roles,id',
 
-        ];
-    }
+    //     ];
+    // }
     public function posts(){
         return $this->hasMany(Post::class,'c','id');
     }

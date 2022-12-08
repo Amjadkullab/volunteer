@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class InstitutionController extends Controller
 {
@@ -23,7 +25,7 @@ class InstitutionController extends Controller
      */
     public function index()
     {
-        $institutions = Institution::withCount('permissions')->latest('id')->paginate(5);
+        $institutions = Institution::with('roles')->latest('id')->paginate(5);
         return view('dashboard.institution.index', compact('institutions'));
 
     }
@@ -35,10 +37,10 @@ class InstitutionController extends Controller
      */
     public function create()
     {
-        // $roles = Role::where('guard_name','=','institution')->get();
+        $roles = Role::where('guard_name','=','institution')->get();
         $institution = new Institution();
 
-        return view('dashboard.institution.create',compact('institution'));
+        return view('dashboard.institution.create',compact('roles','institution'));
 
     }
 
@@ -50,28 +52,59 @@ class InstitutionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(institution::rules(), [
-            'required' => 'هذا الحقل  ايجباري',
-            'min' => 'هذا الحقل ',
-            'max' => 'هذا الحقل',
-            'image' => 'هذا الحقل من نوع صورة'
-        ]);
-        $request->merge([
-            'password' => Hash::make('password')
-        ]);
-        $data = $request->except('cover_image','password');
-        $data['cover_image'] = $this->uploadImage($request);
-        $data = $request->except('logo_image');
-        $data['logo_image'] = $this->upload_Image($request);
+        $validator = Validator($request->all(),[
+            'name' => 'required|string|min:3|max:255',
+            'cover_image' => 'image',
+            'logo_image' => 'image',
+            'description' => 'required|string|min:3',
+            'active' =>'required',
+            'email'=>'required',
+            'role_id'=>'required|numeric|exists:roles,id',
 
-     Institution::create($data);
-    //   if($isSaved) assignRole(Role::findOrFail($request->input('role_id')));
+            ]);
+            if(!$validator->fails()){
+        $institution = new Institution();
+        $institution->name= $request->get('name');
+        $ex = $request->file('cover_image')->getClientOriginalExtension();
+        $new_img_name = 'System_tasks'.'.'. time(). '.' . $ex;
+        $request->file('cover_image')->move(public_path('uploads/cover_image/'),$new_img_name );
+        $institution->cover_image = $new_img_name;
+        $e = $request->file('logo_image')->getClientOriginalExtension();
+        $new_img_name1 = 'System_tasks'.'.'. time(). '.' . $e;
+        $request->file('logo_image')->move(public_path('uploads/logo_image/'),$new_img_name1 );
+        $institution->logo_image = $new_img_name1;
+        $institution->description= $request->get('description');
+        $institution->active= $request->get('active');
+        $institution->email= $request->get('email');
+        $institution->password= Hash::make('password');
+        $isSaved = $institution->save();
+        if($isSaved)$institution->assignRole(Role::findOrFail($request->input('role_id')));
+    //     $request->merge([
+    //         'password' => Hash::make('password')
+    //     ]);
+    //     $data = $request->except('cover_image','password');
+    //     $data['cover_image'] = $this->uploadImage($request);
+    //     $data = $request->except('logo_image');
+    //     $data['logo_image'] = $this->upload_Image($request);
+
+    // $isSaved =  Institution::create($data);
+    //   if($isSaved) {assignRole(Role::findOrFail($request->input('role_id')));}
+
+    return response()->json([
+        'message' => $isSaved ? "تمت الاضافة بنجاح " : "فشلت الاضافة ",
+
+    ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+
+} else{
+    return response()->json([
+        'message' => $validator->getMessageBag()->first()],Response::HTTP_BAD_REQUEST);
 
 
+}
 
-        return redirect()->route('dashboard.institution.index')
-            ->with('success', 'تم انشاء المؤسسة بنجاح!');
-
+    //     return redirect()->route('dashboard.institution.index')
+    //         ->with('success', 'تم انشاء المؤسسة بنجاح!');
+    // }
     }
 
     /**
@@ -93,13 +126,12 @@ class InstitutionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Institution $institution)
     {
-        // $roles = Role::where('guard_name','=','institution')->get();
-        $institution = Institution::findOrFail($id);
+        $roles = Role::where('guard_name','=','institution')->get();
         // $roles =Role::where('guard_name','=','institution')->get();
 
-        return view('dashboard.institution.edit',compact('institution'));
+        return view('dashboard.institution.edit',compact('roles','institution'));
 
     }
 
@@ -110,38 +142,84 @@ class InstitutionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Institution $institution)
     {
-        $request->validate(Institution::rules($id));
+        $validator = Validator($request->all(),[
+            'name' => 'required|string|min:3|max:255',
+            'cover_image' => 'nullable|image',
+            'logo_image' => 'nullable|image',
+            'description' => 'required|string|min:3',
+            'active' =>'required',
+            'email'=>'required',
+            'role_id'=>'required|numeric|exists:roles,id',
 
-        $category = Institution::findOrFail($id);
-        $old_image = $category->cover_image;
+            ]);
+            // $institution = new Institution();
+            if(!$validator->fails()){
+            $institution->name= $request->get('name');
 
-        $data = $request->except('cover_image');
+            $new_img_name = $institution->cover_image ;
+            if($request->has('cover_image')){
+                $ex = $request->file('cover_image')->getClientOriginalExtension();
+                $new_img_name = 'System_tasks'.'.'. time(). '.' . $ex;
+                $request->file('cover_image')->move(public_path('uploads/cover_image/'),$new_img_name );
+                $institution->image = $new_img_name;}
 
-        $new_image = $this->uploadImage($request);
+            $new_img_name1 = $institution->logo_image ;
+            if($request->has('logo_image')){
+                $e = $request->file('logo_image')->getClientOriginalExtension();
+                $new_img_name1 = 'System_tasks'.'.'. time(). '.' . $e;
+                $request->file('logo_image')->move(public_path('uploads/logo_image/'),$new_img_name1 );
+                $institution->image = $new_img_name1;}
 
-        if ($new_image) {
-            $data['cover_image'] = $new_image;
-        }
-        $old_image = $category->logo_image;
+            $institution->description= $request->get('description');
+            $institution->active= $request->get('active');
+            $institution->email= $request->get('email');
+            $institution->password= Hash::make('password');
 
-        $data = $request->except('logo_image');
 
-        $new_image = $this->upload_Image($request);
+        $isSaved = $institution->save();
+         if($isSaved) $institution->syncRoles(Role::findOrFail($request->input('role_id')));
+        // $old_image = $category->cover_image;
 
-        if ($new_image) {
-            $data['logo_image'] = $new_image;
-        }
+        // $data = $request->except('cover_image');
 
-        $category->update($data);
+        // $new_image = $this->uploadImage($request);
 
-        if ($old_image && $new_image) {
-            Storage::disk('public')->delete($old_image);
-        }
-        // if($isSaved) $data->syncRoles(Role::findOrFail($request->input('role_id')));
-        return redirect()->route('dashboard.institution.index')
-            ->with('success', 'تم تعديل المؤسسة بنجاح!');
+        // if ($new_image) {
+        //     $data['cover_image'] = $new_image;
+        // }
+        // $old_image = $category->logo_image;
+
+        // $data = $request->except('logo_image');
+
+        // $new_image = $this->upload_Image($request);
+
+        // if ($new_image) {
+        //     $data['logo_image'] = $new_image;
+        // }
+
+        // $category->update($data);
+
+        // if ($old_image && $new_image) {
+        //     Storage::disk('public')->delete($old_image);
+        // }
+        return response()->json([
+            'message' => $isSaved ? "تم التعديل بنجاح " : "فشل التعديل ",
+
+
+        ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+
+
+
+    } else{
+        return response()->json([
+            'message' => $validator ->getMessageBag()->first()],Response::HTTP_BAD_REQUEST);
+
+
+    }
+        // return redirect()->route('dashboard.institution.index')
+        //     ->with('success', 'تم تعديل المؤسسة بنجاح!');
     }
 
     /**
@@ -150,14 +228,26 @@ class InstitutionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Institution $institution)
     {
-        $institution = Institution::findOrFail($id);
-        $institution->delete();
+        // if(auth('admin')->id != $admin->id){
+        $isDeleted = $institution->delete();
+       if($isDeleted){
+        return response()->json([
+            'icon'=> 'success',
+            'title'=> 'نجحت العملية!',
+            'text'=> 'تم الحذف بنجاح '
+        ], Response::HTTP_OK);
+       } else{
+        return response()->json([
+            'icon'=> 'error',
+            'title'=> 'فشلت العملية!',
+            'text'=> 'فشل الحذف ، لا يمكن حذف حسابك'
+        ], Response::HTTP_BAD_REQUEST);
 
-        return redirect()->route('dashboard.institution.index')
-            ->with('danger', 'تم حذف المؤسسة بنجاح!');
+       }
     }
+
     protected function uploadImage(Request $request)
     {
         if (!$request->hasFile('cover_image')) {

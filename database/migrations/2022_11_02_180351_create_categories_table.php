@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-         
+            $table->foreignId('institution_id')->constrained('institutions');
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('image');
-            $table->enum('status', ['active', 'archived'])
+            $table->enum('status',['active', 'archived'])
                 ->default('active');
             $table->timestamps();
             $table->softDeletes();

@@ -20,7 +20,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="updated_form"  >
+                        <form id="updated_form">
                             @csrf
                             {{-- @if (auth('admin')->id() != $admin->id) --}}
                             <div class="form-group">

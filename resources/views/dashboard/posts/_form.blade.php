@@ -51,7 +51,7 @@
     <label>الصورة</label>
     <input type="file" name="image" @class(['form-control', 'is-invalid'=> $errors->has('image')])>
     @if ($post->image)
-    <img src="{{ asset('storage/' . $post->image) }}" width="200">
+    <img src="{{ asset('uploads/posts/' . $post->image) }}" width="200">
         @endif
     @error('image')
     <div class="invalid-feedback">{{ $message }}</div>

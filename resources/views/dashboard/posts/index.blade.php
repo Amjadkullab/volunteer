@@ -27,7 +27,7 @@
                     <tr>
                         <td>{{ $post->id }}</td>
                         <td> <a href="{{route('dashboard.posts.show',$post->id)}}"> {{ $post->title }}</a></td>
-                        <td><img src="{{ asset('storage/' . $post->image) }}" width="120" height="80"> </td>
+                        <td><img src="{{ asset('uploads/posts/' . $post->image) }}" width="120" height="80"> </td>
                         <td>{{ $post->category->name }}</td>
                         <td>{{ $post->location }}</td>
                         <td>{{ $post->status == 'active' ? 'نشط' : 'أرشيف' }}</td>

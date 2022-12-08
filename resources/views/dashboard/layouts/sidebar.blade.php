@@ -31,7 +31,7 @@
                         </p>
                     </a>
                 </li>
-                {{-- @canany(['Read-VolunteerCategory', 'Create-VolunteerCategory', 'Delete-VolunteerCategory']) --}}
+                @canany(['Read-VolunteerCategory', 'Create-VolunteerCategory', 'Delete-VolunteerCategory'])
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="fas fa-layer-group nav-icon"></i>
@@ -41,110 +41,82 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        {{-- @can(['Read-VolunteerCategory']) --}}
+                        @can(['Read-VolunteerCategory'])
                         <li class="nav-item">
                             <a href="{{route('dashboard.categories.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>عرض الفئات</p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
-                        {{-- @can(['Create-VolunteerCategory']) --}}
+                        @endcan
+                        @can(['Create-VolunteerCategory'])
                         <li class="nav-item">
                             <a href="{{route('dashboard.categories.create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>انشاء فئة</p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
-                        {{-- @can(['Delete-VolunteerCategory']) --}}
+                        @endcan
+                        @can(['Delete-VolunteerCategory'])
                         <li class="nav-item">
                             <a href="{{route('dashboard.categories.trash')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>سلة المحذوفات</p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
+                        @endcan
                     </ul>
                 </li>
-                {{-- @endcanany --}}
+                @endcanany
 
-                {{-- @canany(['Read-Posts', 'Create-Post', 'Delete-Post']) --}}
+                @canany(['Read-Posts', 'Create-Post', 'Delete-Post'])
                 <li class="nav-item has-treeview">
 
                     <a href="#" class="nav-link">
-                        <i class="fas fa-user"></i>                                                <p>
-                            الاعمال التطوعية
+                        <i class="fas fa-user nav-icon"></i>
+                        <p>الاعمال التطوعية
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+
                     <ul class="nav nav-treeview">
-                        {{-- @can(['Read-Posts']) --}}
+                        @can(['Read-Posts'])
                         <li class="nav-item">
                             <a href="{{route('dashboard.posts.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>عرض الاعمال</p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
-                        {{-- @can(['Create-Post']) --}}
+                        @endcan
+                        @can(['Create-Post'])
                         <li class="nav-item">
                             <a href="{{route('dashboard.posts.create')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>انشاء عمل</p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
-                        {{-- @can(['Delete-Post']) --}}
+                        @endcan
+                        @can(['Delete-Post'])
                         <li class="nav-item">
                             <a href="{{route('dashboard.posts.trash')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>سلة المحذوفات</p>
                             </a>
                         </li>
-                        {{-- @endcan --}}
+                        @endcan
                     </ul>
                 </li>
 
-                {{-- @endcanany
-                @canany(['Read-Institutions','Create-Institution']) --}}
+                @endcanany
 
-                {{-- @canany(['Read-Institutions','Create-Institution']) --}}
 
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-home nav-icon"></i>
-                        المؤسسات
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        {{-- @can(['Read-Institutions']) --}}
-                        <li class="nav-item">
-                            <a href="{{route('dashboard.institution.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>عرض المؤسسات</p>
-                            </a>
-                        </li>
-                        {{-- @endcan --}}
-                        {{-- @can(['Create-Institution']) --}}
-                        <li class="nav-item">
-                            <a href="{{route('dashboard.institution.create')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>انشاء مؤسسة</p>
-                            </a>
-                        </li>
-                        {{-- @endcan --}}
 
-                    </ul>
-                </li>
-                {{-- @endcanany --}}
 
 
                 {{-- <li class="nav-header">Human Resoueces</li> --}}
-                {{-- @canany(['Create-Admin', 'Read-Admins']) --}}
+                @canany(['Create-Admin', 'Read-Admins'])
                 <li class="nav-header">الموارد البشرية </li>
-                {{-- @canany(['Create-Admin', 'Read-Admins']) --}}
+                @canany(['Create-Admin', 'Read-Admins'])
                 <li class="nav-item">
                   <a href="#" class="nav-link">
                     <i class="fas fa-user nav-icon"></i>
@@ -154,60 +126,91 @@
                     </p>
                   </a>
                   <ul class="nav nav-treeview">
-                      {{-- @can('Create-Admin') --}}
+                      @can('Create-Admin')
                       <li class="nav-item">
-                          {{-- <a href="{{route('dashboard.admin.create')}}" class="nav-link"> --}}
-                            {{-- <i class="fas fa-plus-suquer"></i> --}}
+                          <a href="{{route('dashboard.admin.create')}}" class="nav-link">
+                            <i class="fas fa-plus-suquer"></i>
                             <i class="far fa-plus-square nav-icon"></i>
                             <p>انشاء</p>
                           </a>
                         </li>
-                        {{-- @endcan --}}
-                        {{-- @can('Read-Admins') --}}
+                        @endcan
+                        @can('Read-Admins')
                       <li class="nav-item">
-                          {{-- <a href="{{route('dashboard.admin.index')}}" class="nav-link"> --}}
+                          <a href="{{route('dashboard.admin.index')}}" class="nav-link">
                               <i class="fas fa-list nav-icon"></i>
                             <p>عرض </p>
                           </a>
                         </li>
-                        {{-- @endcan --}}
+                        @endcan
                   </ul>
                 </li>
-                {{-- @endcanany --}}
+                @endcanany
+                @canany(['Read-Institutions','Create-Institution'])
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-home nav-icon"></i>
+                            <p>
+                        المؤسسات
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @can(['Read-Institutions'])
+                        <li class="nav-item">
+                            <a href="{{route('dashboard.institution.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>عرض المؤسسات</p>
+                            </a>
+                        </li>
+                        @endcan
+                        @can(['Create-Institution'])
+                        <li class="nav-item">
+                            <a href="{{route('dashboard.institution.create')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>انشاء مؤسسة</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                    </ul>
+                </li>
+                @endcanany
+
+
+
+                @endcanany
+
+
+
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-user nav-icon"></i>
-                    <p>
-                      المستخدمين
-                      <i class="fas fa-angle-left right"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-user nav-icon"></i>
+                      <p>
+                        المستخدمين
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
 
-                      <li class="nav-item">
-                          {{-- <a href="{{route('dashboard.user.create')}}" class="nav-link"> --}}
-                            {{-- <i class="fas fa-plus-suquer"></i> --}}
-                            <i class="far fa-plus-square nav-icon"></i>
-                            <p>انشاء</p>
-                          </a>
-                        </li>
-
-
-                      <li class="nav-item">
-                          {{-- <a href="{{route('dashboard.user.index')}}" class="nav-link"> --}}
-                              <i class="fas fa-list nav-icon"></i>
-                            <p>عرض</p>
-                          </a>
-                        </li>
-                  </ul>
-                </li>
-
-                {{-- @endcanany --}}
+                        <li class="nav-item">
+                            <a href="{{route('dashboard.user.create')}}" class="nav-link">
+                              <i class="fas fa-plus-suquer"></i>
+                              <i class="far fa-plus-square nav-icon"></i>
+                              <p>انشاء</p>
+                            </a>
+                          </li>
 
 
-                {{-- @endcanany --}}
-                {{-- @endcanany --}}
-
+                        <li class="nav-item">
+                            <a href="{{route('dashboard.user.index')}}" class="nav-link">
+                                <i class="fas fa-list nav-icon"></i>
+                              <p>عرض</p>
+                            </a>
+                          </li>
+                    </ul>
+                  </li>
 
                 @canany(['Read-Roles', 'Create-Role', 'Create-Permission','Read-Permissions'])
                 <li class="nav-header">الأدوار والصلاحيات </li>

@@ -53,6 +53,7 @@
 
                                     <button type="button" onclick="store()" class="btn btn-primary">انشاء</button>
                                 </div>
+                                </div>
                         </form>
                     </div>
                     <!-- /.card -->
