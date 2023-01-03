@@ -32,10 +32,16 @@ class InstitutionPolicy
      */
     public function view(admin $admin , Institution $institution)
     {
-        return $admin->hasPermissionTo('Read-Institutions')
+        return $admin->hasPermissionTo('Read-Institutions')|| $admin->hasPermissionTo('Show-Institutions')
         ? $this->allow()
         : $this->deny('Don\'t have Permission',403);
     }
+    // public function view_all(admin $admin , Institution $institution)
+    // {
+    //     return
+    //     ? $this->allow()
+    //     : $this->deny('Don\'t have Permission',403);
+    // }
 
     /**
      * Determine whether the user can create models.

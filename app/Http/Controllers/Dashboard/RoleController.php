@@ -7,6 +7,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class RoleController extends Controller
 {
     public function __construct(){

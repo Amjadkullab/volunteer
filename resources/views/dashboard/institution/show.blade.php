@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title', المؤسسات)
+@section('title', 'المؤسسات')
 
 @section('breadcrumb')
     @parent
@@ -9,8 +9,8 @@
 @endsection
 
 @section('content')
-        <table class="table">
-            <thead>
+<table id="example2" class="table table-bordered table-hover" >
+    <thead class="custom_thead" style="background-color:rgb(160, 152, 152) ">
                 <tr>
                     <th>اسم المؤسسة</th>
                     <th>صورة الغلاف</th>

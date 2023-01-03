@@ -30,8 +30,8 @@
         <button class="btn btn-dark  mx-2">بحث</button>
     </form>
 
-    <table class="table">
-        <thead>
+     <table id="example2" class="table table-bordered table-hover" >
+        <thead class="custom_thead" style="background-color:rgb(160, 152, 152) ">
             <tr>
                 <th>#</th>
                 <th>اسم الفئة</th>

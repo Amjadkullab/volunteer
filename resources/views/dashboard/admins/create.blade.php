@@ -17,22 +17,13 @@
                 <div class="col-md-12 ">
                     <!-- general form elements -->
                     <div class="card card-primary">
-                        <div class="card-header">
-                            {{-- <h3 class="card-title">انشاء أدمن </h3> --}}
-                        </div>
+
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form id="created_form" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label>اختر الدور</label>
-                                    <select class="form-control roles" id="role_id">
-                                        @foreach ($roles as $role )
-                                        <option value="{{$role->id}}">{{$role->name}}</option>
-                                        @endforeach
-                                    </select>
-                                  </div>
+
                                 <div class="form-group">
                                     <label for="name">الاسم</label>
                                     <input type="name" class="form-control" id="name" placeholder="أدخل الاسم">
@@ -42,10 +33,21 @@
                                     <label for="email">الايميل</label>
                                     <input type="email" class="form-control" id="email" placeholder="أدخل الايميل ">
                                 </div>
+                                <div class="form-group">
+                                    <label>اختر الدور</label>
+                                    <select class="form-control roles" id="role_id">
+                                        @foreach ($roles as $role )
+                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
+                                  </div>
 
+                              <div class="form-group">
+                                <label>حالة الأدمن</label>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="active">
                                     <label class="custom-control-label" for="active">مفعل</label>
+                                </div>
                                 </div>
 
                                 <!-- /.card-body -->

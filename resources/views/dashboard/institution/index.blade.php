@@ -7,8 +7,8 @@
 @endsection
 
 @section('content')
-        <table class="table">
-            <thead>
+<table id="example2" class="table table-bordered table-hover" >
+    <thead class="custom_thead" style="background-color:rgb(160, 152, 152) ">
                 <tr>
                     <th>#</th>
                     <th>الاسم</th>
@@ -32,7 +32,9 @@
                         <td>{{ $institution->name }}</td>
                         <td><img src="{{ asset('uploads/cover_image/'. $institution->cover_image) }}" width="120" height="80"> </td>
                         <td><img src="{{ asset('uploads/logo_image/' . $institution->logo_image) }}" width="120" height="80"> </td>
-                        <td>{{ $institution->description }}</td>
+                        @can(['Show-Institutions'])
+                        <td><a href="{{route('dashboard.institution.show',$institution->id)}}">{{ $institution->description }}</a></td>
+                        @endcan
                         <td>{{ $institution->email }}</td>
                         <td>
                             @foreach ($institution->roles as $role)

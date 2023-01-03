@@ -16,9 +16,7 @@
                 <div class="col-md-12 ">
                     <!-- general form elements -->
                     <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">انشاء دور </h3>
-                        </div>
+                       
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form id="created_form" enctype="multipart/form-data">

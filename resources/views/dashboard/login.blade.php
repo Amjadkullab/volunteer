@@ -19,16 +19,17 @@
 <div class="login-box">
   <div class="login-logo">
 
-        <div class="btn btn-primary" style="width: 85%"><span> تسجيل الدخول لنظام ادارة العمل التطوعي</span></div>
+        <div  style="width: 100%;text-align:center; font-size:20px"><h5> تسجيل الدخول لنظام ادارة العمل التطوعي</h5></div>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
+      <img src="{{asset('admin-asset/images/R.jpeg')}}" alt="" style="height: 80px;text-align: center; display: block; margin-left: auto;margin-right: auto; backgruond-color:rgba(153, 147, 147, 0.938);">
       <p class="login-box-msg" style="color: rgb(124, 111, 238)">تسجيل الدخول</p>
 
       <form>
         <div class="input-group mb-3">
-          <input type="email" id="email" class="form-control" placeholder="Email">
+          <input type="email" id="email" class="form-control" placeholder="أدخل الايميل">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -36,7 +37,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" id="password" placeholder="Password">
+          <input type="password" class="form-control" id="password" placeholder="أدخل كلمة المرور">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -94,7 +95,7 @@
 
 <script>
     function login(guard){
-        axios.post('/login/',{
+        axios.post('/loginpost',{
             'email' : document.getElementById('email').value,
             'password' : document.getElementById('password').value,
             'remember' : document.getElementById('remember').checked,

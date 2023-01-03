@@ -14,9 +14,7 @@
 @section('content')
 
 <div class="card card-primary">
-    <div class="card-header">
-      <h3 class="card-title">انشاء صلاحية </h3>
-    </div>
+
     <!-- /.card-header -->
     <!-- form start -->
    <form id="create-form">
@@ -24,7 +22,7 @@
                   <div class="card-body">
                     <div class="form-group">
                         <label>اختر الصلاحية</label>
-                        <select class="form-control guard_name" id="guard_name" style="width: 100%;">
+                        <select class="form-control guard_name" id="guard_name" style="width:100%;">
                           <option value="admin">الادمن</option>
                           <option value="institution">المؤسسة</option>
                         </select>

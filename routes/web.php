@@ -24,9 +24,9 @@ use App\Http\Controllers\Dashboard\InstitutionPermissionsController;
 |
 */
 
-Route::get('/karam', function () {
-    return  encrypt('12345678');
-});
+// Route::get('/karam', function () {
+//     return  encrypt('12345678');
+// });
 // route::prefix('/')->middleware('guest:admin')->group(function(){
 
 //     Route::get('{guard}/login',[authcontroller::class,'showlogin'])->name('login');
@@ -38,7 +38,7 @@ Route::prefix('/')->middleware('guest:admin')->group(function(){
 
     // Route::view('login','store.login')->name('login');
     Route::get('{guard}/login',[AuthController::class , 'ShowLogin'])->name('login');
-    Route::post('/login',[AuthController::class , 'login']);
+    Route::post('/loginpost',[AuthController::class , 'login'])->name('loginpost');
 });
 
 

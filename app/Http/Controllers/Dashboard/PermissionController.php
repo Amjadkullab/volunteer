@@ -21,7 +21,7 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::all();
-       return response()->view('dashboard.Spatie.Permissions.index',compact('permissions'));
+       return response()->view('dashboard.Spatie.permissions.index',compact('permissions'));
     }
 
     /**
@@ -31,7 +31,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return response()->view('dashboard.Spatie.Permissions.create');
+        return response()->view('dashboard.Spatie.permissions.create');
     }
 
     /**
@@ -80,7 +80,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        return response()->view('dashboard.Spatie.Permissions.edit', compact('permission'));
+        return response()->view('dashboard.Spatie.permissions.edit', compact('permission'));
     }
 
     /**

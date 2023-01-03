@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Post;
 use App\Models\Category;
+
+use App\Models\Institution;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\institution;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,7 +37,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $institution = institution::all();
+        $institution = Institution::all();
         $post = new Post();
 
         return view('dashboard.posts.create', compact('categories', 'post','institution'));

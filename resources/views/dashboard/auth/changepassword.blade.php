@@ -4,9 +4,9 @@
 <div class="col-md-12">
     <!-- general form elements -->
     <div class="card card-primary">
-        <div class="card-header">
+        {{-- <div class="card-header">
             {{-- <h3 class="card-title">تغيير كلمة المرور </h3> --}}
-        </div>
+        {{-- </div> --}} 
         <!-- /.card-header -->
         <!-- form start -->
         <form id="create-form">

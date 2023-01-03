@@ -9,8 +9,8 @@
 @endsection
 
 @section('content')
-        <table class="table">
-            <thead>
+<table id="example2" class="table table-bordered table-hover" >
+    <thead class="custom_thead" style="background-color:rgb(160, 152, 152) ">
                 <tr>
                     <th>العنوان</th>
                     <th>الوصف</th>

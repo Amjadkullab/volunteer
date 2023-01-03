@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
+use App\Models\Institution;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -25,9 +27,14 @@ class Post extends Model
             );
     }
 
-    public function institutions()
+    public function institution()
     {
-        return $this->belongsTo(institution::class, 'institution_id', 'id');
+        return $this->belongsTo(Institution::class, 'institution_id', 'id')
+            ->withDefault(
+                [
+                    'name' => 'اسم المؤسسة'
+                ]
+            );
     }
 
     public static function rules()
@@ -42,15 +49,7 @@ class Post extends Model
         ];
     }
 
-    public function institution()
-    {
-        return $this->belongsTo(institution::class, 'institution_id', 'id')
-            ->withDefault(
-                [
-                    'name' => 'اسم المؤسسة'
-                ]
-            );
-    }
+
 
     public function scopeFilter(Builder $builder, $filters)
     {

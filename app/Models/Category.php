@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Post;
+use App\Models\Institution;
 use Illuminate\Validation\Rule;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -24,12 +26,12 @@ class Category extends Model
 
     public function posts()
     {
-        return $this->hasMany(Post::class, 'institution_id', 'id');
+        return $this->hasMany(Post::class, 'category_id', 'id');
     }
 
     public function institutions()
     {
-        return $this->hasMany(institution::class, 'institution_id', 'id');
+        return $this->belongsTo(Institution::class, 'institution_id', 'id');
     }
 
 
@@ -46,6 +48,9 @@ class Category extends Model
             $builder->where('status', '=', $value);
         });
     }
+    // public function getStatusAttribute(){
+    //     return $this->active ? "Active" : "Disabled";
+    // }
 
     public static function rules($id = 0)
     {

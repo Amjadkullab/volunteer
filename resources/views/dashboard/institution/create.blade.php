@@ -19,14 +19,14 @@
             <div class="card-body">
             <div class="form-group">
                 <label>اسم المؤسسة</label>
-                <input type="text" name="name" id="name" @class(['form-control', 'is-invalid'=> $errors->has('name')]) value="{{ old('name', $institution->name) }}">
+                <input type="text" placeholder="أدخل اسم المؤسسة" name="name" id="name" @class(['form-control', 'is-invalid'=> $errors->has('name')]) value="{{ old('name', $institution->name) }}">
                 @error('name')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label>صورة الغلاف</label>
-                <input type="file" name="cover_image" id="cover_image" @class(['form-control', 'is-invalid'=> $errors->has('cover_image')])>
+                <input type="file" name="cover_image"  id="cover_image" @class(['form-control', 'is-invalid'=> $errors->has('cover_image')])>
                 @if ($institution->cover_image)
                 <img src="{{ asset('uploads/cover_image/' . $institution->cover_image) }}" width="200">
                     @endif
@@ -47,14 +47,21 @@
 
             <div class="form-group">
                 <label>الوصف</label>
-                <textarea name="description" id="description" @class(['form-control', 'is-invalid'=> $errors->has('description')]) cols="30">{{old('description',$institution->description)}}</textarea>
+                <textarea name="description" placeholder="أدخل الوصف" id="description" @class(['form-control', 'is-invalid'=> $errors->has('description')]) cols="30">{{old('description',$institution->description)}}</textarea>
                 @error('description')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="email">الايميل</label>
-                <input type="email" name="email" class="form-control" id="email" placeholder="أدخل الايميل ">
+                <input type="email" name="email" placeholder="أدخل الايميل" class="form-control" id="email" placeholder="أدخل الايميل ">
+            </div>
+            <div class="form-group">
+            <label>حالة المؤسسة</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="active">
+                <label class="custom-control-label" for="active">مفعل</label>
+            </div>
             </div>
             <div class="form-group">
                 <label>اختر الدور</label>
@@ -66,10 +73,7 @@
               </div>
 
 
-              <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="active">
-                <label class="custom-control-label" for="active">مفعل</label>
-            </div>
+
                 <div class="card-footer">
                     <button type="button" onclick="store()" class="btn btn-primary">انشاء</button>
                 </div>

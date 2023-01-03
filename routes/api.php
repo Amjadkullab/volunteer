@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('profile', [AccessTokensController::class, 'profile']);
     Route::post('logout', [AccessTokensController::class, 'logout']);
 });
-Route::apiResource('/categories', CategoryController::class);
-Route::apiResource('/posts', PostController::class);
+Route::apiResource('categories', CategoryController::class);
+Route::apiResource('posts', PostController::class);
 Route::get('institutions', [institutionController::class, 'index']);
 

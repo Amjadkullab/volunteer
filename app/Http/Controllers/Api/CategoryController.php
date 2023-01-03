@@ -19,7 +19,10 @@ class CategoryController extends Controller
         $categories = Category::active()
             ->latest()->paginate(4);
         return response()->json([
-            'message' => 'Categories in Successfuly', 'data' => $categories
+            'status'=> true ,
+            'code'=>200 ,
+            'message' => 'Categories in Successfuly',
+            'data' => $categories
         ], Response::HTTP_OK);
     }
 

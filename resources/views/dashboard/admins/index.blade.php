@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">
+
               {{-- <h3 class="card-title">الأدمن</h3> --}}
 
               {{-- <div class="card-tools">
@@ -28,11 +28,11 @@
                   </div>
                 </div>
               </div> --}}
-            </div>
+    
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-              <table class="table table-hover table-bordered table-striped text-nowrap">
-                <thead>
+                <table id="example2" class="table table-bordered table-hover" >
+                    <thead class="custom_thead" style="background-color:rgb(160, 152, 152) ">
                   <tr>
                     <th>الرقم</th>
                     <th>الاسم</th>
