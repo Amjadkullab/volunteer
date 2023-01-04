@@ -8,13 +8,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController extends Controller
+class Usercontroller extends Controller
 {
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $users = User::where('id','!=', auth('admin')->id())->get();
-        return view('Dashboard.Users.index',compact('users'));
+        $users = User::all();
+        return view('dashboard.Users.index',compact('users'));
     }
 
     /**
@@ -24,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Dashboard.Users.create');
+        return view('dashboard.Users.create');
     }
 
     /**
@@ -83,11 +87,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findorfail('id')->get();
 
-        return view('Dashboard.Users.edit', compact('user'));
+
+        return view('dashboard.Users.edit', compact('user'));
     }
 
     /**
@@ -97,9 +101,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,User $user)
     {
-        $user = User::findorfail('id')->get();
+       
         $validator = Validator($request->all(),[
 
             'name'=>'required|string|min:3|max:30',
@@ -115,7 +119,7 @@ class UserController extends Controller
              $user->active= $request->get('active');
             $isUpdated = $user->save();
              return response()->json([
-                'message' => $isUpdated ? "تمت عملية التعديل بنجاح " : " فشلت عملية التعديل",
+                'message' => $isUpdated ? "تمت عملية التعديل بنجاح" : "فشلت عملية التعديل ",
 
             ], $isUpdated ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
 
@@ -133,24 +137,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findorfail('id')->get();
+
         $isDeleted = $user->delete();
         if($isDeleted){
          return response()->json([
              'icon'=> 'success',
-             'title'=> 'نجحت عملية الحذف!',
-             'text'=> 'تم الحذف بنجاح '
+             'title'=> 'نجحت العملية!',
+             'text'=> 'تمت عملية الحذف بنجاح '
          ], Response::HTTP_OK);
         } else{
          return response()->json([
              'icon'=> 'error',
-             'title'=> 'فشلت عملية الحذف!',
-             'text'=> 'فشلت العملية '
+             'title'=> 'فشلت العملية!',
+             'text'=> 'فشلت عملية الحذف '
          ], Response::HTTP_BAD_REQUEST);
 
         }
     }
-
 }

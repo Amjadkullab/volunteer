@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title', 'تعديل مستخدم ')
+@section('title', 'تعديل المستخدم ')
 @section('page-title', 'Update User')
 @section('main-page-title', 'Home')
 @section('small-page-title', 'Users')
@@ -11,9 +11,7 @@
                 <div class="col-md-12 ">
                     <!-- general form elements -->
                     <div class="card card-primary">
-                        <div class="card-header">
-                            {{-- <h3 class="card-title">تعديل المستخدم </h3> --}}
-                        </div>
+
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form id="updated_form"  >
@@ -21,7 +19,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">الاسم</label>
-                                    <input type="name" class="form-control" id="name" placeholder="ادخل الاسم "
+                                    <input type="name" class="form-control" id="name" placeholder="ادخل الاسم"
                                     value="{{$user->name}}">
                                 </div>
                                 {{-- <div class="form-group">
@@ -39,11 +37,8 @@
                                 </div>
 
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input"@if($user->id==auth('admin')->id) disabled @endif id="active"
-                                    @if ($user->active)
-                                    checked
-                                    @endif>
-                                    <label class="custom-control-label" for="active">مغعل</label>
+                                    <input type="checkbox" class="custom-control-input"id="active" value="{{$user->active}}">
+                                    <label class="custom-control-label" for="active">تم الانضمام</label>
                                 </div>
 
                                 <!-- /.card-body -->
@@ -74,7 +69,7 @@
 
 
     function update(id){
-        axios.put('/admin/admin/'+ id,{
+        axios.put('/admin/user/'+ id,{
             name : document.getElementById('name').value,
             email : document.getElementById('email').value,
             active: document.getElementById('active').checked,

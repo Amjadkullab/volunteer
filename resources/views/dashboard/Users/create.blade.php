@@ -11,9 +11,7 @@
                 <div class="col-md-12 ">
                     <!-- general form elements -->
                     <div class="card card-primary">
-                        <div class="card-header">
-                            {{-- <h3 class="card-title">انشاء مستخدم </h3> --}}
-                        </div>
+                       
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form id="created_form" enctype="multipart/form-data">
@@ -31,7 +29,7 @@
 
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="active">
-                                    <label class="custom-control-label" for="active">مفعل</label>
+                                    <label class="custom-control-label" for="active">تم الانضمام</label>
                                 </div>
 
                                 <!-- /.card-body -->
@@ -59,7 +57,7 @@
 @section('scripts')
 <script>
 function store(){
-        axios.post('/admin/admin/',{
+        axios.post('/admin/user/',{
             name : document.getElementById('name').value,
             email : document.getElementById('email').value,
             active: document.getElementById('active').checked,
@@ -68,7 +66,7 @@ function store(){
     // handle success
     console.log(response);
     toastr.success(response.data.message);
-    window.location.href="/admin/admin/";
+    window.location.href="/admin/user/";
   })
   .catch(function (error) {
     // handle error

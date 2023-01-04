@@ -14,7 +14,7 @@
                     <th>الاسم</th>
                     <th>صورة الغلاف</th>
                     <th>صورة اللوجو</th>
-                    <th>الوصف</th>
+                    {{-- <th>الوصف</th> --}}
                     <th>الايميل</th>
                     <th>الدور</th>
                     {{-- <th>الصلاحيات</th> --}}
@@ -32,9 +32,9 @@
                         <td>{{ $institution->name }}</td>
                         <td><img src="{{ asset('uploads/cover_image/'. $institution->cover_image) }}" width="120" height="80"> </td>
                         <td><img src="{{ asset('uploads/logo_image/' . $institution->logo_image) }}" width="120" height="80"> </td>
-                        @can(['Show-Institutions'])
+                        {{-- @can(['Show-Institutions'])
                         <td><a href="{{route('dashboard.institution.show',$institution->id)}}">{{ $institution->description }}</a></td>
-                        @endcan
+                        @endcan --}}
                         <td>{{ $institution->email }}</td>
                         <td>
                             @foreach ($institution->roles as $role)

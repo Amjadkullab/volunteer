@@ -24,9 +24,9 @@ use App\Http\Controllers\Dashboard\InstitutionPermissionsController;
 |
 */
 
-// Route::get('/karam', function () {
-//     return  encrypt('12345678');
-// });
+Route::get('/karam', function () {
+    return  encrypt('12345678');
+});
 // route::prefix('/')->middleware('guest:admin')->group(function(){
 
 //     Route::get('{guard}/login',[authcontroller::class,'showlogin'])->name('login');
